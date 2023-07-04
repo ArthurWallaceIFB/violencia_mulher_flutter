@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:final_arthur_wallace/view/styles.dart';
 import 'package:final_arthur_wallace/view/cardapio_view.dart';
 import 'package:final_arthur_wallace/view/contato_view.dart';
 import 'package:final_arthur_wallace/view/pedidos_view.dart';
-
 
 class HomeView extends StatefulWidget {
   @override
@@ -23,6 +23,11 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _makeEmergencyCall() async {
+    final String url = 'tel:190';
+    await launch(url);
   }
 
   @override
@@ -50,6 +55,12 @@ class _HomeViewState extends State<HomeView> {
         selectedItemColor: AppColors.primaryColor,
         onTap: _onItemTapped,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _makeEmergencyCall,
+        child: Icon(Icons.warning),
+        backgroundColor: AppColors.accentColor,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
